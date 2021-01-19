@@ -1,13 +1,12 @@
 const obstacle = document.getElementById("obstacle");
 const hole = document.getElementById("hole")
 const platypus = document.getElementById("platypus")
-let jumping = 0; // Used in jump function
+let jumping = 0;
 let score = 0;
 let fallCount = 0;
 
 // Generate random hole
 hole.addEventListener('animationiteration', () => {
-    console.log('hha')
     let random = -((Math.random()*370) + 130);
     hole.style.top = `${random}px`;
     score++; // add to score for beating the hole
@@ -19,8 +18,7 @@ window.addEventListener("keyup", jump)
 
 // Gravity
 setInterval(() => { 
-    let platypusTop = 
-    parseInt(window.getComputedStyle(platypus).getPropertyValue("top"));
+    let platypusTop = parseInt(window.getComputedStyle(platypus).getPropertyValue("top"));
 
     // Acceleration 
     if(fallCount > 50) {
@@ -31,6 +29,7 @@ setInterval(() => {
         platypusTop += 3; 
     }
 
+    // If platypus is not jumping at the moment make him fall down
     if(jumping == 0) {
         platypus.style.top = `${platypusTop}px` 
     }
@@ -46,7 +45,7 @@ setInterval(() => {
 }, 10)
 
 function jump() {
-    jumping = 1;
+    jumping = 1; // Stop platypus from falling down
     let jumpCount = 0;
     let jumpInterval = setInterval(() => {
         let platypusTop = 
@@ -91,11 +90,8 @@ function containsInHeight(elemA, elemB) {
     let heightA = parseInt(window.getComputedStyle(elemA).getPropertyValue("height"));
     let heightB = parseInt(window.getComputedStyle(elemB).getPropertyValue("height"));
 
-
     // Make the counting start point the same as the character's one (uzgodnienie height hole'a z tych 500px)
     topB = topB + 500 
-
-    console.log(`topA: ${topA} , topB: ${topB}, hA: ${heightA}, hB: ${heightB}`)
 
     return ((topA > topB) && (topA + heightA < topB + heightB)) ? true : false
 }
