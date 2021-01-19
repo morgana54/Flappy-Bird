@@ -43,6 +43,14 @@ body {
     overflow: hidden;
 }
 
+/* add some cool style to it later */
+.score { 
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 1.5rem;
+}
+
 .obstacle {
     height: 500px;
     width: 50px;
@@ -50,17 +58,17 @@ body {
     position: relative;
     left: 500px;
     border-radius: 3px;;
-    animation: obstacle 2s linear infinite; /* duration will change every x jumps to make it harder!!!! */
+    animation: obstacle 5s linear infinite; /* duration will change every x jumps to make it harder!!!! */
 }
 
 .hole {
-    height: 130px;
+    height: 170px;
     width: 50px;
     background-color: cornsilk;
     position: relative;
     top: -500px; /* extremes: -500, -130 */
     left: 500px;
-    animation: obstacle 2s linear infinite;
+    animation: obstacle 5s linear infinite;
 }
 
 /* dodać animację fajną jak będzie skok czy coś, jakiś zwykły rotate wystarczy */
@@ -68,8 +76,9 @@ body {
     position: absolute;
     top: 100px;
     width: 80px;
-    height: 60px;
+    height: 25px;
     z-index: 3;
+    left: 0px;
 }
 
 .image {
@@ -94,8 +103,3 @@ h1 {
     position: relative;
     top: 100px;
 }
-
-
-/* DODAWAĆ TEŻ JAKIEŚ FAJNE ANIMACJE I LEPSZE STYLE DO TEJ GRY ŻEBY BYŁA ŻYWA!!!!!!!!!!!!!!!!!!!!!!! transition properties 
-- na pewno do heading dasz coś fajnego ze zmianą kształtu, koloru, cienia i wielkości!!!
-*/
