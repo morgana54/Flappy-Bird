@@ -14,7 +14,7 @@ hole.addEventListener('animationiteration', () => {
 })
 
 // Make platypus jump
-window.addEventListener("keyup", jump)
+window.addEventListener("click", jump)
 
 // Gravity
 setInterval(() => { 
