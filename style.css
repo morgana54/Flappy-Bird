@@ -58,7 +58,7 @@ body {
     position: relative;
     left: 500px;
     border-radius: 3px;;
-    animation: obstacle 5s linear infinite; /* duration will change every x jumps to make it harder!!!! */
+    animation: obstacle 4s linear infinite; /* duration will change every x jumps to make it harder!!!! */
 }
 
 .hole {
@@ -66,9 +66,9 @@ body {
     width: 50px;
     background-color: cornsilk;
     position: relative;
-    top: -500px; /* extremes: -500, -130 */
+    top: -500px; /* extremes of visibility: -500, -170 */
     left: 500px;
-    animation: obstacle 5s linear infinite;
+    animation: obstacle 4s linear infinite;
 }
 
 /* dodać animację fajną jak będzie skok czy coś, jakiś zwykły rotate wystarczy */

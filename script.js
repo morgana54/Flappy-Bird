@@ -1,51 +1,64 @@
 const obstacle = document.getElementById("obstacle");
 const hole = document.getElementById("hole")
 const platypus = document.getElementById("platypus")
-let jumping = 0;
-let score = 0;
-let fallCount = 0;
+
+const state = {
+    jumping: 0,
+    score: 0,
+    fallCount: 0
+}
 
 // Generate random hole
 hole.addEventListener('animationiteration', () => {
-    let random = -((Math.random()*370) + 130);
-    hole.style.top = `${random}px`;
-    score++; // add to score for beating the hole
-    updateScore()
+    randomHole(hole)
+    state.score++; // add to score for beating the hole
 })
 
 // Make platypus jump
-window.addEventListener("click", jump)
+window.addEventListener("keydown", jump)
 
 // Gravity
 setInterval(() => { 
     let platypusTop = parseInt(window.getComputedStyle(platypus).getPropertyValue("top"));
 
     // Acceleration 
-    if(fallCount > 50) {
+    if(state.fallCount > 50) {
         platypusTop += 5;
-    } else if(fallCount > 25) {
+    } else if(state.fallCount > 25) {
         platypusTop += 4;
     } else {
         platypusTop += 3; 
     }
 
     // If platypus is not jumping at the moment make him fall down
-    if(jumping == 0) {
+    if(state.jumping == 0) {
         platypus.style.top = `${platypusTop}px` 
     }
 
-    if ((platypusTop > 475) || (intersects(platypus, obstacle) && !containsInHeight(platypus, hole))) {
-        alert("Game over! Score: " + score)
+    if ((platypusTop > 485) || (intersects(platypus, obstacle) && !containsInHeight(platypus, hole))) {
+        alert("Game over! Score: " + state.score) // Alert stopuje wszystko z js na stronie!!
         platypus.style.top = 100 + "px";
-        score = 0;
-        fallCount = 0;
+        obstacle.style.animation = "none";
+        hole.style.animation = "none";
+        state.score = 0;
+        state.fallCount = 0;
+        
+        // Restart animation after alert has been closed
+        setTimeout(() => {
+            obstacle.style.animation = "obstacle 4s linear infinite";
+            hole.style.animation = "obstacle 4s linear infinite";
+            randomHole(hole)
+        }, 10)
     }
 
-    fallCount++;
+    // console.log(getComputedStyle(obstacle).getPropertyValue("left"))
+
+    state.fallCount++;
+    updateScore()
 }, 10)
 
 function jump() {
-    jumping = 1; // Stop platypus from falling down
+    state.jumping = 1; // Stop platypus from falling down
     let jumpCount = 0;
     let jumpInterval = setInterval(() => {
         let platypusTop = 
@@ -59,17 +72,22 @@ function jump() {
         }
         if(jumpCount > 26) {
             clearInterval(jumpInterval);
-            jumping = 0;
+            state.jumping = 0;
             jumpCount = 0;
         }
         jumpCount++;
-        fallCount = 0;
+        state.fallCount = 0;
     }, 10)
 } 
 
+function randomHole(element) {
+    let random = -((Math.random()*325) + 175); // Random number from -175 to -500
+    element.style.top = `${random}px`;
+}
+
 function updateScore() {
     let scoreBox = document.getElementById("score")
-    scoreBox.innerHTML = `Score: ${score}`
+    scoreBox.innerHTML = `Score: ${state.score}`
 }
 
 // returns true or false depening on whether elements intersect or not
@@ -96,21 +114,31 @@ function containsInHeight(elemA, elemB) {
     return ((topA > topB) && (topA + heightA < topB + heightB)) ? true : false
 }
 
-// // sleep time expects milliseconds
-// function sleep (time) {
-//     return new Promise((resolve) => setTimeout(resolve, time));
-// }
-
 /* DODAWAĆ TEŻ JAKIEŚ FAJNE ANIMACJE I LEPSZE STYLE DO TEJ GRY ŻEBY BYŁA ŻYWA!!!!!!!!!!!!!!!!!!!!!!! transition properties 
-- napsz kod estetyczniej troszkę! 
 - do heading dasz coś fajnego ze zmianą kształtu, koloru, cienia i wielkości!!!
 - dodać instrukcję grania krótką
-- ogarnąć lepszy restart gry, żeby animacja filarów zaczynała się zawsze od początku
 - custom alert
 - dodać animację fajną jak będzie skok czy coś, jakiś zwykły rotate wystarczy
-- dodać animację umierającego dziobaka
-- poziom trudności:
-    - zmniejszać dziury lekko co jakiś score
-    - przyspieszać lekko animację co jakiś score!!
+- dodać animację umierającego dziobaka (np. nagle clearujesz interwały i potem odpalasz jakąś animację z css --> ale najpierw spytaj Kacpra co sądzi o twoich pomysłach, żbey efektywnie pracować)
+  // // - poziom trudności: ZAPYTAĆ KACPRA NAJPIERW BO TOBIE COŚ NIE SZŁO!!!!! a on pewnie wie od razu
+    // // - zmniejszać dziury lekko co jakiś score
+    // // - przyspieszać lekko animację co jakiś score!!
+
+    // // Increase level of diffculty
+    // if(state.score > 1) {
+    //     obstacle.style.animation = "obstacle 3s linear infinite";
+    //     hole.style.animation = "obstacle 3s linear infinite";
+    //     hole.style.height = 155 + 'px'
+    // }
 - zrobić tak żeby zawsze dziobak umierał jeśli się dokładnie styka z obstacle (miałeś pomysł na sleep function, ale moze np. wgle nie bedzie potrzebne po zrobieniu animacji itp.)
 */
+
+// WZÓR NA PISANIE GIER OD KACPRA
+// const state = {}
+
+// function gameloop() {
+//     state = update(state)
+//     render(state)
+// }
+
+// setInterval(gameloop, 10)
