@@ -79,6 +79,7 @@ body {
     height: 25px;
     z-index: 3;
     left: 0px;
+    transform: none;
 }
 
 .image {
@@ -102,4 +103,48 @@ header {
 h1 {
     position: relative;
     top: 100px;
+    transform: none;
+    background-color: none;
+    padding: 10px;
+    border-radius: 10px;
+    animation: heading 1.5s ease-in-out infinite; /* make it stop after the start of the game*/
+}
+
+h1 {
+    transform: scale(1.5);
+}
+
+@keyframes heading {
+    0% 
+    {
+        transform: scale(1);
+        background-color: rgb(99, 186, 189);
+    }
+    50% 
+    {
+        transform: scale(1.3);
+        background-color: transparent
+    }
+    100% 
+    {
+        transform: scale(1);
+        background-color: rgb(99, 186, 189);
+    }
+}
+
+.alert {
+    position: absolute;
+    height: 530px;
+    width: 510px;
+    background-color: cadetblue;
+    z-index: 3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* dać potem fajną animację że z display block na none żeby się chowało szybko fajnie do środka (czyli scale 0 np.) */
+}
+
+.alert h2 {
+    margin-bottom: 50px;
+    font-size: 2rem;
 }
