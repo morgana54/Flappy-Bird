@@ -7,29 +7,38 @@ if(!localStorage.getItem('highscore')) {
     localStorage.setItem('highscore', 0)
 }
 
+// Generate random hole after each animation iteration
+hole.addEventListener('animationiteration', () => {
+    randomHole(hole)
+    state.score++; // add score for beating the hole
+})
+
 const state = {
     jumping: 0,
     score: 0,
     highscore: localStorage.getItem('highscore'),
     fallCount: 0
 }
-// Generate random hole
-hole.addEventListener('animationiteration', () => {
-    randomHole(hole)
-    state.score++; // add to score for beating the hole
-})
+
 // Make platypus jump
 window.addEventListener("keydown", (e) => {
     if(e.code === 'Space' ) {
        jump()
     }
-}) 
+})  
 // Start the game
-window.addEventListener("click", startGame) // Later after asking Kacper make some distinct buttons to be pressed to call this function
+window.addEventListener("click", () => {
+    // Start animation
+    obstacle.style.animation = "obstacle 4s linear infinite";
+    hole.style.animation = "obstacle 4s linear infinite";
+    // Start game
+    startGame()
+})
 
 function startGame() {
     // Remove listener so that startGame function will only run once
     window.removeEventListener("click", startGame)
+    // Hide start screen
     document.getElementById('startScreen').style.display = 'none'
     // This function has to be called to update HTML from LocalStarage right away and not already after first playing first game
     updateHighScore()
@@ -48,8 +57,7 @@ function startGame() {
         if(state.jumping == 0) {
             platypus.style.top = `${platypusTop}px` 
         }
-
-        // Game over
+        // Game over situation
         if ((platypusTop > 485) || (intersects(platypus, obstacle) && !containsInHeight(platypus, hole))) {
             alert("Game over! Your score: " + state.score) // Alert stopuje wszystko z js na stronie!!
             platypus.style.top = 100 + "px";
@@ -61,12 +69,12 @@ function startGame() {
             updateHighScore()
             state.score = 0;
             state.fallCount = 0;
-        // Restart animation after alert has been closed
-        setTimeout(() => {
-            obstacle.style.animation = "obstacle 4s linear infinite";
-            hole.style.animation = "obstacle 4s linear infinite";
-            randomHole(hole)
-        }, 10)
+            // Restart animation after alert has been closed
+            setTimeout(() => {
+                obstacle.style.animation = "obstacle 4s linear infinite";
+                hole.style.animation = "obstacle 4s linear infinite";
+                randomHole(hole)
+            }, 10)
     }
     state.fallCount++;
     updateScore()
