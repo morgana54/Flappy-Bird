@@ -138,6 +138,8 @@ h1 {
 }
 
 .startScreen {
+    display: flex;
+    flex-direction: column;
     position: absolute;
     height: 530px;
     width: 510px;
@@ -150,6 +152,10 @@ h1 {
 }
 
 .startScreen h2 {
-    margin-bottom: 50px;
+    margin-bottom: 30px;
     font-size: 2rem;
+}
+
+.space {
+    text-decoration: underline;
 }

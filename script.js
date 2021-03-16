@@ -2,6 +2,11 @@ const obstacle = document.getElementById("obstacle");
 const hole = document.getElementById("hole")
 const platypus = document.getElementById("platypus")
 
+// Set highscore locally so it is not null (and if it's not already existing)
+if(!localStorage.getItem('highscore')) {
+    localStorage.setItem('highscore', 0)
+}
+
 const state = {
     jumping: 0,
     score: 0,
@@ -14,7 +19,11 @@ hole.addEventListener('animationiteration', () => {
     state.score++; // add to score for beating the hole
 })
 // Make platypus jump
-window.addEventListener("keydown", jump) 
+window.addEventListener("keydown", (e) => {
+    if(e.code === 'Space' ) {
+       jump()
+    }
+}) 
 // Start the game
 window.addEventListener("click", startGame) // Later after asking Kacper make some distinct buttons to be pressed to call this function
 
@@ -128,8 +137,7 @@ function containsInHeight(elemA, elemB) {
 }
 
 
-// /* DODAWAĆ TEŻ JAKIEŚ FAJNE ANIMACJE I LEPSZE STYLE DO TEJ GRY ŻEBY BYŁA ŻYWA!!!!!!!!!!!!!!!!!!!!!!! transition properties 
-// - dodać instrukcję grania krótką + STEROWANIE TYLKO SPACJĄ (keyCode)
+// /* DODAWAĆ TEŻ JAKIEŚ FAJNE ANIMACJE I LEPSZE STYLE DO TEJ GRY ŻEBY BYŁA ŻYWA!!!!!!!!!!!!!!!!!!!!!!! transition properties
 // - make nice animation of hiding the box after pressing start (to the middle, lasting 0.5s)
 // - stop the heading animation after start of the game
 // - fajna animacja powiększania się score kiedy się zdobędzie punkt
