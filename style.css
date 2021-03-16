@@ -44,11 +44,15 @@ body {
 }
 
 /* add some cool style to it later */
-.score { 
+.score, .highscore { 
     position: absolute;
     top: 15px;
     right: 15px;
     font-size: 1.5rem;
+}
+
+.highscore {
+    left: 15px;
 }
 
 .obstacle {
@@ -80,6 +84,7 @@ body {
     z-index: 3;
     left: 0px;
     transform: none;
+    border-radius: 40%; /*make collisions more precise -- SPYTAJ KACPRA CZY TO MA SENS*/
 }
 
 .image {
@@ -132,7 +137,7 @@ h1 {
     }
 }
 
-.alert {
+.startScreen {
     position: absolute;
     height: 530px;
     width: 510px;
@@ -144,7 +149,7 @@ h1 {
     /* dać potem fajną animację że z display block na none żeby się chowało szybko fajnie do środka (czyli scale 0 np.) */
 }
 
-.alert h2 {
+.startScreen h2 {
     margin-bottom: 50px;
     font-size: 2rem;
 }
