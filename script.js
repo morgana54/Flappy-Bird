@@ -145,24 +145,7 @@ function containsInHeight(elemA, elemB) {
 }
 
 
-// /* DODAWAĆ TEŻ JAKIEŚ FAJNE ANIMACJE I LEPSZE STYLE DO TEJ GRY ŻEBY BYŁA ŻYWA!!!!!!!!!!!!!!!!!!!!!!! transition properties
-// - make nice animation of hiding the box after pressing start (to the middle, lasting 0.5s)
-// - stop the heading animation after start of the game
-// - fajna animacja powiększania się score kiedy się zdobędzie punkt
-// - custom alert na koniec pokazujący wynik i game over
-// - dodać animację umierającego dziobaka (np. nagle clearujesz interwały i potem odpalasz jakąś animację z css --> ale najpierw spytaj Kacpra co sądzi o twoich pomysłach, żbey efektywnie pracować)
-//   // // - poziom trudności: ZAPYTAĆ KACPRA NAJPIERW BO TOBIE COŚ NIE SZŁO!!!!! a on pewnie wie od razu
-//     // // - zmniejszać dziury lekko co jakiś score
-//     // // - przyspieszać lekko animację co jakiś score!!
-
-//     // // Increase level of diffculty
-//     // if(state.score > 1) {
-//     //     obstacle.style.animation = "obstacle 3s linear infinite";
-//     //     hole.style.animation = "obstacle 3s linear infinite";
-//     //     hole.style.height = 155 + 'px'
-//     // }
-
-// // WZÓR NA PISANIE GIER OD KACPRA
+// // WZÓR NA PRZYSZŁOŚĆ NA PISANIE GIER OD KACPRA
 // // const state = {}
 
 // // function gameloop() {
